@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: ollama-service
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    envVars:
+      - key: OLLAMA_HOST
+        value: 0.0.0.0:11434
+      - key: OLLAMA_ORIGINS
+        value: "*"
+    healthCheckPath: /api/tags
+    disk:
+      name: ollama-disk
+      mountPath: /root/.ollama
+      sizeGB: 10
